@@ -7,11 +7,11 @@ require "toy-attributes/version"
 Gem::Specification.new do |s|
   s.name        = "toy-attributes"
   s.version     = ToyAttributes::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ToyAttributes."
-  s.description = "TODO: Description of ToyAttributes."
+  s.authors     = ["Christian Mortaro"]
+  s.email       = ["christian.mortaro@gmail.com"]
+  s.homepage    = "https://github.com/Mortaro/Toy-Attributes"
+  s.summary     = "Handles the attributes for Toy-Locomotive."
+  s.description = "Allows to assign attributes directly inside ActiveRecord models without having to write migrations"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
