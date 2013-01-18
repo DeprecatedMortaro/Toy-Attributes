@@ -3,7 +3,9 @@ module ToyAttributes
 end
 
 require "active_record"
+
 require "toy-attributes/methods"
 require "toy-attributes/observer"
+require "toy-attributes/relations"
 
 require "toy-attributes/railtie" if defined? Rails

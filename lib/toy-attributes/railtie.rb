@@ -1,6 +1,7 @@
 module ToyAttributes
 
   def self.load! dir_path
+    ActiveRecord::Base.extend ToyAttributes::Methods
     Dir[dir_path].each { |file| load file }
   end
 

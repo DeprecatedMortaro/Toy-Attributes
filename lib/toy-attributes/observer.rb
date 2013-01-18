@@ -7,6 +7,8 @@ module ToyAttributes::Observer
     model.attr_accessible column_name
   end
 
+  private
+
   def self.assert_existence_of_table model
     unless ActiveRecord::Base.connection.table_exists? model.table_name
       Class.new(ActiveRecord::Migration).create_table(model.table_name.to_sym) { |t| t.timestamps }
