@@ -6,9 +6,12 @@ module ToyAttributes::Relations
       alias :_has_many :has_many
       alias :_has_one :has_one
 
-      def has_many model
-        self._has_many model
-        enforce_relation_with model
+      def has_many *models
+        options = models.extract_options!
+        models.each do |model|
+          self._has_many model, options
+          enforce_relation_with model
+        end
       end
 
       def has_one model

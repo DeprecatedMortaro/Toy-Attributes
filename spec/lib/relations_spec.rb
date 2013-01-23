@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Warrior do
   it { should respond_to(:weapons_attributes=) }
+  it { should respond_to(:items_attributes=) }
   it { should have_many(:weapons) }
 end
 
