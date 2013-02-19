@@ -28,7 +28,13 @@ module ToyAttributes::Observer
 
   def self.update_table_column column_name, column_type, model
     if model.columns_hash[column_name.to_s] && model.columns_hash[column_name.to_s].type != column_type
-      Class.new(ActiveRecord::Migration).change_column model.table_name, column_name, column_type
+      klass = Class.new(ActiveRecord::Migration)
+      old_type_column_name = "#{column_name}_old_type"
+      klass.rename_column model.table_name.to_sym, column_name, old_type_column_name
+      klass.add_column model.table_name.to_sym, column_name, column_type
+      model.reset_column_information
+      model.find_each { |instance| instance.update_attribute column_name, instanceold_type_column_name }
+      klass.remove_column model.table_name.to_sym, old_type_column_name
     end
   end
 
