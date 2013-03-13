@@ -17,4 +17,8 @@ describe ToyAttributes::Observer do
     Warrior.columns_hash['story'].type.should == :text
   end
 
+  it "accepts default option" do
+    Weapon.new.grade.should == 1
+  end
+
 end
