@@ -20,17 +20,26 @@ module ToyAttributes::Relations
         options = models.extract_options!
         models.each do |model|
           self.send :"_has_#{quantity}", model, options
-          enforce_relation_with model
+          enforce_relation_with model, options
         end
       end
 
-      def enforce_relation_with model
-        related = model.to_s.singularize.classify.constantize
-        symbol = to_s.underscore.to_sym
-        related.integer :"#{symbol}_id"
-        related.belongs_to symbol
-        accepts_nested_attributes_for model
-        attr_accessible :"#{model}_attributes"
+      def enforce_relation_with model, options
+        if options[:class_name]
+          related = options[:class_name].constantize
+          related.integer options[:foreign_key]
+          symbol = options[:foreign_key].to_s[0..-4].to_sym
+          related.belongs_to symbol, class_name: to_s
+          accepts_nested_attributes_for model
+          attr_accessible :"#{model}_attributes"
+        else
+          related = model.to_s.singularize.classify.constantize
+          symbol = to_s.underscore.to_sym
+          related.integer :"#{symbol}_id"
+          related.belongs_to symbol
+          accepts_nested_attributes_for model
+          attr_accessible :"#{model}_attributes"
+        end
       end
 
     end
